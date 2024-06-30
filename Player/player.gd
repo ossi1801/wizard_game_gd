@@ -3,10 +3,11 @@ extends CharacterBody2D
 @onready var animations = $AnimationPlayer
 @export var player_speed:float = 150
 @export var player_dash_multiplier: float = 5;
+@export var player_max_health:int = 100;
 var player_dash:float = 1;
 var player_can_dash:bool=true;
 var player_invincible: bool = false;
-var player_health: int = 50;
+var player_health: int = player_max_health;
 
 #@export var player_acceleration_speed:float = 1  
 

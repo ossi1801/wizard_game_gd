@@ -4612,3 +4612,10 @@ position = Vector2(119, 63)
 position_smoothing_enabled = true
 script = ExtResource("2_3q6rf")
 tilemap = NodePath("../..")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 25.0
+offset_top = 15.0
+offset_right = 65.0
+offset_bottom = 38.0
+text = "Test"
