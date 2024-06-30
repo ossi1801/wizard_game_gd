@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://biamjmbfco18b"]
+[gd_scene load_steps=19 format=3 uid="uid://biamjmbfco18b"]
 
 [ext_resource type="PackedScene" uid="uid://drlhvmpyasek5" path="res://Player/player.tscn" id="1_0vup5"]
 [ext_resource type="Script" path="res://camera_follow.gd" id="2_3q6rf"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c1f2wvj7xvfut" path="res://basic_tiles/ground_decorations.png" id="6_1grnj"]
 [ext_resource type="Texture2D" uid="uid://38m6qlxxcvhd" path="res://basic_tiles/terrain_tiles_v2.png" id="7_56mur"]
 [ext_resource type="Texture2D" uid="uid://r7yigyluy7nl" path="res://basic_tiles/water_and_island_tiles_v2.png" id="8_t4fmw"]
+[ext_resource type="PackedScene" uid="uid://bb2yn4yhj6rs1" path="res://Enemies/slime.tscn" id="10_1fdtl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qol24"]
 texture = ExtResource("2_xqbyi")
@@ -4569,7 +4570,8 @@ texture = ExtResource("8_t4fmw")
 29:15/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_lmrne"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Grass"
 terrain_set_0/terrain_0/color = Color(0.501961, 0.968627, 0.25098, 1)
@@ -4582,15 +4584,6 @@ sources/5 = SubResource("TileSetAtlasSource_et1h3")
 sources/6 = SubResource("TileSetAtlasSource_yf5p1")
 
 [node name="World" type="Node2D"]
-y_sort_enabled = true
-
-[node name="Player" parent="." instance=ExtResource("1_0vup5")]
-position = Vector2(119, 63)
-
-[node name="camera_follow" type="Camera2D" parent="Player" node_paths=PackedStringArray("tilemap")]
-position_smoothing_enabled = true
-script = ExtResource("2_3q6rf")
-tilemap = NodePath("../../TileMap")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -4608,3 +4601,14 @@ layer_3/name = "house"
 layer_3/y_sort_enabled = true
 layer_3/z_index = 1
 layer_3/tile_data = PackedInt32Array(262172, 983040, 0)
+
+[node name="Slime" parent="TileMap" instance=ExtResource("10_1fdtl")]
+position = Vector2(269, 145)
+
+[node name="Player" parent="TileMap" instance=ExtResource("1_0vup5")]
+position = Vector2(119, 63)
+
+[node name="camera_follow" type="Camera2D" parent="TileMap/Player" node_paths=PackedStringArray("tilemap")]
+position_smoothing_enabled = true
+script = ExtResource("2_3q6rf")
+tilemap = NodePath("../..")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://drlhvmpyasek5"]
+[gd_scene load_steps=9 format=3 uid="uid://drlhvmpyasek5"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_beaxv"]
 [ext_resource type="Texture2D" uid="uid://beat7xntt6ojt" path="res://assets/ukkeli.png" id="2_u1nbb"]
@@ -64,6 +64,10 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjjrx"]
 size = Vector2(13, 8)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hnuju"]
+radius = 6.0
+height = 22.0
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
@@ -84,3 +88,13 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_mjjrx")
+
+[node name="hurtBox" type="Area2D" parent="."]
+visibility_layer = 3
+position = Vector2(0, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
+position = Vector2(0, -6)
+shape = SubResource("CapsuleShape2D_hnuju")
+
+[connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
