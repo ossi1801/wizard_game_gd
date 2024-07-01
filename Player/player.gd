@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 @onready var game_manager = %GameManager
 @onready var animations = $AnimationPlayer
@@ -39,7 +40,14 @@ func animate_movement():
 func flip_animation_h(is_going_left:bool):
 	for child in get_children():
 			if child is Sprite2D:
-				child.flip_h = !is_going_left; 
+				child.flip_h = !is_going_left;
+			if child.name == "weapon":
+				var c =  child as Node2D
+				if is_going_left:c.rotation = -45
+				else:c.rotation = 45;
+				
+				
+				  #= is_going_left;  
 func dash():
 	if player_can_dash:
 		player_dash = player_dash_multiplier;
@@ -62,7 +70,7 @@ func get_mouse_pos():
 func handle_collisions():
 	for i in get_slide_collision_count():
 		var collider:Object = get_slide_collision(i).get_collider()
-		print_debug(collider.name)
+		#print_debug(collider.name)
 func _physics_process(delta):
 	movement()
 	get_mouse_pos() #Todo import here sword and other stuff
@@ -76,17 +84,14 @@ func hurt_animation(time:float):
 	await get_tree().create_timer(time).timeout
 	effects.play("RESET")
 	
-func _on_hurt_box_area_entered(area):
-	if area.name == "hitBox":
+func _on_hurt_box_area_entered(area:Area2D):
+	if area.get_parent() is Enemy and area.name == "hitBox":
+		var enemy = area.get_parent() as Enemy
 		if player_invincible == false:
-			player_health-=1;
+			player_health-=enemy.get_enemy_damage();
 			update_health_to_gui()
 			hurt_animation(0.7)
-			
-			
-			
-		#print_debug(area.get_parent().name) # Replace with function body.
+
 
 func update_health_to_gui():
-	print_debug(player_health);
 	game_manager.update_gui(str(player_health))

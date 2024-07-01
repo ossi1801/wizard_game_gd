@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://drlhvmpyasek5"]
+[gd_scene load_steps=14 format=3 uid="uid://drlhvmpyasek5"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_beaxv"]
 [ext_resource type="Texture2D" uid="uid://be8v6ghqdifnw" path="res://assets/player.png" id="2_2ylok"]
+[ext_resource type="PackedScene" uid="uid://chht16ri50mtx" path="res://Player/Weapons/staff.tscn" id="3_ps6wf"]
 
 [sub_resource type="Animation" id="Animation_6chou"]
 length = 0.001
@@ -164,5 +165,12 @@ shape = SubResource("CapsuleShape2D_hnuju")
 libraries = {
 "": SubResource("AnimationLibrary_aptgf")
 }
+
+[node name="weapon" type="Node2D" parent="."]
+position = Vector2(0, -6)
+
+[node name="Staff" parent="weapon" instance=ExtResource("3_ps6wf")]
+position = Vector2(1, -8)
+scale = Vector2(1.53, 1.53)
 
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]

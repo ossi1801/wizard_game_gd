@@ -67,3 +67,11 @@ shape = SubResource("CapsuleShape2D_x15p1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_mry5b")
+
+[node name="hurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_mry5b")
+
+[connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
