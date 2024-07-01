@@ -8,7 +8,7 @@ var player_dash:float = 1;
 var player_can_dash:bool=true;
 var player_invincible: bool = false;
 var player_health: int = player_max_health;
-
+var player_facing_left:bool = true;
 #@export var player_acceleration_speed:float = 1  
 
 func  movement():
@@ -25,13 +25,19 @@ func animate_movement():
 			animations.stop()
 	else:
 		var dir: String = "down"
-		if 	velocity.x < 0: dir = "left"
-		elif 	velocity.x > 0: dir = "right"
-		elif 	velocity.y > 0: dir = "down"
+		if 	velocity.x < 0: 
+			flip_animation_h(true) #dir = "left"
+		elif 	velocity.x > 0: 
+			flip_animation_h(false) #dir = "right"
+		if 	velocity.y > 0: dir = "down"
 		elif 	velocity.y < 0: dir = "up"
 		
 		animations.play("walk_"+dir)
-	
+		
+func flip_animation_h(is_going_left:bool):
+	for child in get_children():
+			if child is Sprite2D:
+				child.flip_h = !is_going_left; 
 func dash():
 	if player_can_dash:
 		player_dash = player_dash_multiplier;
@@ -48,6 +54,7 @@ func dash():
 		player_can_dash = true;
 		
 		
+# flip sprite if going right
 func handle_collisions():
 	for i in get_slide_collision_count():
 		var collider:Object = get_slide_collision(i).get_collider()
