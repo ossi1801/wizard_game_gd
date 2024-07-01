@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://djuyb1e6jg742"]
+
+[ext_resource type="Texture2D" uid="uid://ctoep0c6flteb" path="res://assets/heart.png" id="1_quugq"]
+[ext_resource type="FontFile" uid="uid://c01ly2iyh2l58" path="res://fonts/PixelOperator8.ttf" id="2_drxey"]
+
+[node name="heart" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 40.0
+offset_bottom = 39.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_quugq")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -4.0
+offset_right = 11.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_drxey")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1

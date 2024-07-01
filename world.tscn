@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://biamjmbfco18b"]
+[gd_scene load_steps=22 format=3 uid="uid://biamjmbfco18b"]
 
 [ext_resource type="PackedScene" uid="uid://drlhvmpyasek5" path="res://Player/player.tscn" id="1_0vup5"]
 [ext_resource type="Script" path="res://camera_follow.gd" id="2_3q6rf"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://r7yigyluy7nl" path="res://basic_tiles/water_and_island_tiles_v2.png" id="8_t4fmw"]
 [ext_resource type="PackedScene" uid="uid://bb2yn4yhj6rs1" path="res://Enemies/slime.tscn" id="10_1fdtl"]
 [ext_resource type="FontFile" uid="uid://c01ly2iyh2l58" path="res://fonts/PixelOperator8.ttf" id="11_s8ht1"]
+[ext_resource type="Script" path="res://game_manager.gd" id="12_0y2ry"]
+[ext_resource type="PackedScene" uid="uid://8qn3l6vxwqal" path="res://gui/heart_container.tscn" id="12_uqdqp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qol24"]
 texture = ExtResource("2_xqbyi")
@@ -4621,3 +4623,15 @@ offset_right = 85.0
 offset_bottom = 39.0
 theme_override_fonts/font = ExtResource("11_s8ht1")
 text = "Test"
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("12_0y2ry")
+
+[node name="GUI" type="CanvasLayer" parent="GameManager"]
+
+[node name="heart_container" parent="GameManager/GUI" instance=ExtResource("12_uqdqp")]
+offset_left = 7.0
+offset_top = 9.0
+offset_right = 54.0
+offset_bottom = 39.0

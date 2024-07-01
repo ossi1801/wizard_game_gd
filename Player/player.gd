@@ -1,6 +1,7 @@
 extends CharacterBody2D
-
+@onready var game_manager = %GameManager
 @onready var animations = $AnimationPlayer
+@onready var effects = $effects
 @export var player_speed:float = 150
 @export var player_dash_multiplier: float = 5;
 @export var player_max_health:int = 100;
@@ -21,8 +22,9 @@ func  movement():
 	#No need for delta wtf???? *delta
 func animate_movement():
 	if velocity.length() ==0:
-		if animations.is_playing():
-			animations.stop()
+		animations.play("idle")
+		#if animations.is_playing():
+			#animations.stop()
 	else:
 		var dir: String = "down"
 		if 	velocity.x < 0: 
@@ -53,23 +55,38 @@ func dash():
 		await get_tree().create_timer(0.3).timeout
 		player_can_dash = true;
 		
-		
-# flip sprite if going right
+func get_mouse_pos():
+	if(Input.is_action_just_pressed("cursor_click")):
+		var pos= global_position.direction_to(get_global_mouse_position())
+		print_debug(pos)
 func handle_collisions():
 	for i in get_slide_collision_count():
 		var collider:Object = get_slide_collision(i).get_collider()
 		print_debug(collider.name)
 func _physics_process(delta):
 	movement()
+	get_mouse_pos() #Todo import here sword and other stuff
 	move_and_slide()
 	handle_collisions()
 	animate_movement()
 	
 
-
+func hurt_animation(time:float):
+	effects.play("hurt_blink")
+	await get_tree().create_timer(time).timeout
+	effects.play("RESET")
+	
 func _on_hurt_box_area_entered(area):
 	if area.name == "hitBox":
 		if player_invincible == false:
 			player_health-=1;
-			print_debug(player_health);
+			update_health_to_gui()
+			hurt_animation(0.7)
+			
+			
+			
 		#print_debug(area.get_parent().name) # Replace with function body.
+
+func update_health_to_gui():
+	print_debug(player_health);
+	game_manager.update_gui(str(player_health))

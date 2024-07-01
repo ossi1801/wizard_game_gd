@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://8qn3l6vxwqal"]
+
+[ext_resource type="PackedScene" uid="uid://djuyb1e6jg742" path="res://gui/heart.tscn" id="1_fgc1e"]
+
+[node name="heart_container" type="CenterContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="heart" parent="." instance=ExtResource("1_fgc1e")]
+layout_mode = 2
