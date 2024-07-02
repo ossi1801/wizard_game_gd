@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://drlhvmpyasek5"]
+[gd_scene load_steps=15 format=3 uid="uid://drlhvmpyasek5"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_beaxv"]
 [ext_resource type="Texture2D" uid="uid://be8v6ghqdifnw" path="res://assets/player.png" id="2_2ylok"]
+[ext_resource type="PackedScene" uid="uid://bsb0inqmmxoae" path="res://Player/ghost.tscn" id="2_kgsor"]
 [ext_resource type="PackedScene" uid="uid://chht16ri50mtx" path="res://Player/Weapons/staff.tscn" id="3_ps6wf"]
 
 [sub_resource type="Animation" id="Animation_6chou"]
@@ -19,11 +20,8 @@ tracks/0/keys = {
 "values": [1]
 }
 
-[sub_resource type="Animation" id="Animation_52im0"]
-resource_name = "walk_up"
-length = 0.6
-loop_mode = 1
-step = 0.3
+[sub_resource type="Animation" id="Animation_f3u4m"]
+resource_name = "idle"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -31,10 +29,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [5, 6]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_cndmt"]
@@ -55,8 +53,11 @@ tracks/0/keys = {
 "values": [1, 2]
 }
 
-[sub_resource type="Animation" id="Animation_f3u4m"]
-resource_name = "idle"
+[sub_resource type="Animation" id="Animation_52im0"]
+resource_name = "walk_up"
+length = 0.6
+loop_mode = 1
+step = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -64,10 +65,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0]
+"values": [5, 6]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5j3qr"]
@@ -84,6 +85,21 @@ size = Vector2(13, 8)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hnuju"]
 radius = 6.0
 height = 22.0
+
+[sub_resource type="Animation" id="Animation_8kdup"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.0705882, 0.0235294, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_nvyf6"]
 resource_name = "hurt_blink"
@@ -103,21 +119,6 @@ tracks/0/keys = {
 "values": [Color(1, 0.0705882, 0.0235294, 0.576471), Color(1, 0.0705882, 0.0235294, 0.576471), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_8kdup"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D/ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 0.0705882, 0.0235294, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aptgf"]
 _data = {
 "RESET": SubResource("Animation_8kdup"),
@@ -128,6 +129,7 @@ _data = {
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_beaxv")
+ghost_node = ExtResource("2_kgsor")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2
@@ -173,4 +175,8 @@ position = Vector2(0, -6)
 position = Vector2(1, -8)
 scale = Vector2(1.53, 1.53)
 
+[node name="ghost_timer" type="Timer" parent="."]
+wait_time = 0.01
+
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="timeout" from="ghost_timer" to="." method="_on_ghost_timer_timeout"]

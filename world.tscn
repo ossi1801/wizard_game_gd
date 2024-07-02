@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://biamjmbfco18b"]
+[gd_scene load_steps=23 format=3 uid="uid://biamjmbfco18b"]
 
 [ext_resource type="PackedScene" uid="uid://drlhvmpyasek5" path="res://Player/player.tscn" id="1_0vup5"]
 [ext_resource type="Script" path="res://camera_follow.gd" id="2_3q6rf"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c1f2wvj7xvfut" path="res://basic_tiles/ground_decorations.png" id="6_1grnj"]
 [ext_resource type="Texture2D" uid="uid://38m6qlxxcvhd" path="res://basic_tiles/terrain_tiles_v2.png" id="7_56mur"]
 [ext_resource type="Texture2D" uid="uid://r7yigyluy7nl" path="res://basic_tiles/water_and_island_tiles_v2.png" id="8_t4fmw"]
+[ext_resource type="Script" path="res://astar.gd" id="8_y4yge"]
 [ext_resource type="PackedScene" uid="uid://bb2yn4yhj6rs1" path="res://Enemies/slime.tscn" id="10_1fdtl"]
 [ext_resource type="FontFile" uid="uid://c01ly2iyh2l58" path="res://fonts/PixelOperator8.ttf" id="11_s8ht1"]
 [ext_resource type="Script" path="res://game_manager.gd" id="12_0y2ry"]
@@ -934,6 +935,7 @@ texture = ExtResource("2_xqbyi")
 15:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 15:0/0/physics_layer_0/angular_velocity = 0.0
 15:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-62.2254, 39.598, -62.2254, 91.9239, -48.0833, 93.3381, -35.3553, 93.3381, -33.9411, 79.196, -33.9411, 55.8614, -21.9203, 55.8614, -8.48528, 55.1543, -0.707108, 57.2757, -3.53553, 79.196, -1.41421, 94.0452, 4.94975, 92.631, 26.8701, 91.2168, 36.7696, 91.2168, 55.8614, 91.2168, 61.5183, 89.8026, 62.2254, 74.9533, 64.3467, 43.1335, 65.0538, 20.5061, -64.3467, 18.3848)
+15:0/0/custom_data_0 = "wall"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1vy7g"]
 texture = ExtResource("3_wcwst")
@@ -4578,6 +4580,8 @@ physics_layer_0/collision_mask = 3
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Grass"
 terrain_set_0/terrain_0/color = Color(0.501961, 0.968627, 0.25098, 1)
+custom_data_layer_0/name = "type"
+custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_qol24")
 sources/1 = SubResource("TileSetAtlasSource_1vy7g")
 sources/2 = SubResource("TileSetAtlasSource_dk75h")
@@ -4589,6 +4593,7 @@ sources/6 = SubResource("TileSetAtlasSource_yf5p1")
 [node name="World" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
+unique_name_in_owner = true
 y_sort_enabled = true
 tile_set = SubResource("TileSet_lmrne")
 format = 2
@@ -4604,11 +4609,13 @@ layer_3/name = "house"
 layer_3/y_sort_enabled = true
 layer_3/z_index = 1
 layer_3/tile_data = PackedInt32Array(262172, 983040, 0)
+script = ExtResource("8_y4yge")
 
 [node name="Slime" parent="TileMap" instance=ExtResource("10_1fdtl")]
 position = Vector2(269, 145)
 
 [node name="Player" parent="TileMap" instance=ExtResource("1_0vup5")]
+unique_name_in_owner = true
 position = Vector2(119, 63)
 
 [node name="camera_follow" type="Camera2D" parent="TileMap/Player" node_paths=PackedStringArray("tilemap")]
