@@ -40,14 +40,25 @@ func activity():
 #path find
 func _process(delta):
 	update_enemy_pos();
-	find_path_to(player.global_position);
+	var hit= raycast(global_position,player.global_position)
+	#todocheck length to match enemy vision
+	if(hit.collider is Player):
+		find_path_to(player.global_position);
+func raycast(from:Vector2,to:Vector2) -> Dictionary:
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsRayQueryParameters2D.create(from, to)
+	query.exclude = [self]
+	var result = space_state.intersect_ray(query)
+	return result;
+	#result.values().
+	#print_debug(result.collider is Player)
 
 func update_enemy_pos():
 	if current_path.is_empty():
 		return		
 	var target_position = tilemap.map_to_local(current_path.front())
 	global_position = global_position.move_toward(target_position,_enemy_speed)
-	print_debug(global_position)
+	#print_debug(global_position)
 	if global_position == target_position:
 		current_path.pop_front()
 		
@@ -57,7 +68,7 @@ func find_path_to(vector2_pos: Vector2):
 			tilemap.local_to_map(global_position),
 			tilemap.local_to_map(vector2_pos)
 		).slice(1)
-		print_debug(current_path)
+		#print_debug(current_path)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("cursor_click"):
