@@ -42,8 +42,9 @@ func _process(delta):
 	update_enemy_pos();
 	var hit= raycast(global_position,player.global_position)
 	#todocheck length to match enemy vision
-	if(hit.collider is Player):
-		find_path_to(player.global_position);
+	if "collider" in hit:
+		if(hit.collider is Player):
+			find_path_to(player.global_position);
 func raycast(from:Vector2,to:Vector2) -> Dictionary:
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(from, to)

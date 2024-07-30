@@ -91,7 +91,7 @@ func _physics_process(delta):
 	move_and_slide()
 	handle_collisions()
 	animate_movement()
-	
+	quit_game()
 
 func hurt_animation(time:float):
 	effects.play("hurt_blink")
@@ -106,6 +106,9 @@ func _on_hurt_box_area_entered(area:Area2D):
 			update_health_to_gui()
 			hurt_animation(0.7)
 
+func quit_game():
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()
 
 func update_health_to_gui():
 	game_manager.update_gui(str(player_health))
