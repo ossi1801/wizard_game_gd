@@ -3,6 +3,6 @@
 ---
  <p>
  You shall not pass or something!
-  <img width="100" align='left' src="/assets/sprites/velho.png">
+  <img width="100" align='left' src="src/icons/icon.png">
 </p>
 
