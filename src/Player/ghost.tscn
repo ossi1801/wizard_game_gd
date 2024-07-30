@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsb0inqmmxoae"]
+
+[ext_resource type="Texture2D" uid="uid://be8v6ghqdifnw" path="res://assets/player.png" id="1_1osfu"]
+[ext_resource type="Script" path="res://Player/ghost.gd" id="2_r4cq5"]
+
+[node name="ghost" type="Sprite2D"]
+modulate = Color(0.447059, 0.447059, 0.447059, 1)
+show_behind_parent = true
+texture = ExtResource("1_1osfu")
+offset = Vector2(0, -13)
+hframes = 7
+script = ExtResource("2_r4cq5")
