@@ -1,9 +1,0 @@
-res://Enemies/slime.tscn::aa728c2bafece0dfd928215e50914376::1720130974::res://.godot/exported/133200997/export-464593cd738041ca4ab969904bf18345-slime.scn
-res://gui/heart.tscn::c89c4b823ac3eedabde5e44b2bfa3570::1720130974::res://.godot/exported/133200997/export-8c2b1d88b8aaf0f1d22d4b85a38eca00-heart.scn
-res://gui/heart_container.tscn::62ff88e85b6d21290f53fda18d6d12f0::1720130974::res://.godot/exported/133200997/export-aced4d8532da02a06af3362976c7f0a0-heart_container.scn
-res://Player/Weapons/staff.tscn::b09534cd2a148baa1c1263ec67584cf3::1720130974::res://.godot/exported/133200997/export-08eca6787a5815ffc6464751132f89b4-staff.scn
-res://Player/ghost.tscn::3cfdf4a49bce2bbe2a9381112d53c804::1720130974::res://.godot/exported/133200997/export-19015c4ecdcc760241c9a1006d8d55dd-ghost.scn
-res://Player/player.tscn::9ff500efc3805131066de1d58043d4a0::1720130974::res://.godot/exported/133200997/export-d267b47f7e81a3258979164d56d0d9c2-player.scn
-res://Spells/aoe_gpu_particle.tscn::caee249c4cca3295dc21a93de1f42924::1720130974::res://.godot/exported/133200997/export-b9384e688197673f61045f62247ca6e8-aoe_gpu_particle.scn
-res://tile_map.tscn::182eb84ca7e2dcad2da85c880a91be41::1720130974::res://.godot/exported/133200997/export-22792ee0018d439a895e1f6e6e7db267-tile_map.scn
-res://world.tscn::ee5aa2d9528bfbaeee633e9af2502ef2::1720131518::res://.godot/exported/133200997/export-76e0adcbc83681695885bae615f516ae-world.scn
