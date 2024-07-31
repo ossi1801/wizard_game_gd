@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://drlhvmpyasek5"]
+[gd_scene load_steps=16 format=3 uid="uid://drlhvmpyasek5"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_beaxv"]
 [ext_resource type="Texture2D" uid="uid://be8v6ghqdifnw" path="res://assets/player.png" id="2_2ylok"]
 [ext_resource type="PackedScene" uid="uid://bsb0inqmmxoae" path="res://Player/ghost.tscn" id="2_kgsor"]
 [ext_resource type="PackedScene" uid="uid://chht16ri50mtx" path="res://Player/Weapons/staff.tscn" id="3_ps6wf"]
+[ext_resource type="AudioStream" uid="uid://3ja7tlw04vvn" path="res://assets/audio/hit.wav" id="5_lc20w"]
 
 [sub_resource type="Animation" id="Animation_6chou"]
 length = 0.001
@@ -177,6 +178,10 @@ scale = Vector2(1.53, 1.53)
 
 [node name="ghost_timer" type="Timer" parent="."]
 wait_time = 0.01
+
+[node name="hit_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lc20w")
+volume_db = -13.233
 
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="ghost_timer" to="." method="_on_ghost_timer_timeout"]

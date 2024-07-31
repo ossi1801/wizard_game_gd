@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://biamjmbfco18b"]
+[gd_scene load_steps=19 format=3 uid="uid://biamjmbfco18b"]
 
 [ext_resource type="PackedScene" uid="uid://drlhvmpyasek5" path="res://Player/player.tscn" id="1_0vup5"]
 [ext_resource type="Script" path="res://camera_follow.gd" id="2_3q6rf"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://bb2yn4yhj6rs1" path="res://Enemies/slime.tscn" id="10_1fdtl"]
 [ext_resource type="FontFile" uid="uid://c01ly2iyh2l58" path="res://fonts/PixelOperator8.ttf" id="11_s8ht1"]
 [ext_resource type="Script" path="res://game_manager.gd" id="12_0y2ry"]
+[ext_resource type="AudioStream" uid="uid://bjibm3nolurbv" path="res://assets/audio/life_is_a_melody.wav" id="12_7aroa"]
+[ext_resource type="PackedScene" uid="uid://dcsvdchr7kyee" path="res://Enemies/Boss.tscn" id="12_7chl5"]
 [ext_resource type="PackedScene" uid="uid://8qn3l6vxwqal" path="res://gui/heart_container.tscn" id="12_uqdqp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kashi"]
@@ -2693,3 +2695,11 @@ offset_left = 7.0
 offset_top = 9.0
 offset_right = 54.0
 offset_bottom = 39.0
+
+[node name="music_audio" type="AudioStreamPlayer" parent="GameManager"]
+stream = ExtResource("12_7aroa")
+volume_db = -25.0
+autoplay = true
+
+[node name="Boss" parent="." instance=ExtResource("12_7chl5")]
+position = Vector2(204, 333)

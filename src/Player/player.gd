@@ -15,9 +15,12 @@ var player_invincible: bool = false;
 var player_health: int = player_max_health;
 var player_facing_left:bool = true;
 #@export var player_acceleration_speed:float = 1  
+@onready var hit_sound = $hit_sound
 
 func  movement():
 	var move_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
+	var shoot_dir = Input.get_vector("shoot_left","shoot_right","shoot_up","shoot_down")
+	print(shoot_dir)
 	if(Input.is_action_just_pressed("Dash")):
 		dash()
 	velocity = (move_dir*player_speed) * player_dash;
@@ -87,6 +90,7 @@ func handle_collisions():
 		#print_debug(collider.name)
 func _physics_process(delta):
 	movement()
+	
 	get_mouse_pos() #Todo import here sword and other stuff
 	move_and_slide()
 	handle_collisions()
@@ -105,6 +109,7 @@ func _on_hurt_box_area_entered(area:Area2D):
 			player_health-=enemy.get_enemy_damage();
 			update_health_to_gui()
 			hurt_animation(0.7)
+			hit_sound.play()
 
 func quit_game():
 	if Input.is_action_just_pressed("ui_cancel"):
