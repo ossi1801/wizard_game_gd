@@ -1,11 +1,13 @@
 class_name Player
 extends CharacterBody2D
+
+
 @onready var game_manager = %GameManager
 @onready var animations = $AnimationPlayer
 @onready var effects = $effects
 @export var ghost_node : PackedScene
 @onready var ghost_timer = $ghost_timer
-
+const BULLET = preload("res://Player/bullet.tscn")
 @export var player_speed:float = 150
 @export var player_dash_multiplier: float = 5;
 @export var player_max_health:int = 100;
@@ -17,10 +19,19 @@ var player_facing_left:bool = true;
 #@export var player_acceleration_speed:float = 1  
 @onready var hit_sound = $hit_sound
 
-func  movement():
-	var move_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
+func shoot():
 	var shoot_dir = Input.get_vector("shoot_left","shoot_right","shoot_up","shoot_down")
-	print(shoot_dir)
+	if shoot_dir.length()>0:
+		var bullet = BULLET.instantiate()
+		bullet.player_vector_changed.emit(shoot_dir)
+		get_parent().add_child(bullet)
+		bullet.position = global_position
+
+	#TODO instansiate smth here
+	#print(shoot_dir)
+	
+func movement():
+	var move_dir = Input.get_vector("move_left","move_right","move_up","move_down")
 	if(Input.is_action_just_pressed("Dash")):
 		dash()
 	velocity = (move_dir*player_speed) * player_dash;
@@ -90,7 +101,7 @@ func handle_collisions():
 		#print_debug(collider.name)
 func _physics_process(delta):
 	movement()
-	
+	shoot()
 	get_mouse_pos() #Todo import here sword and other stuff
 	move_and_slide()
 	handle_collisions()
