@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://biamjmbfco18b"]
+[gd_scene load_steps=20 format=3 uid="uid://biamjmbfco18b"]
 
 [ext_resource type="PackedScene" uid="uid://drlhvmpyasek5" path="res://Player/player.tscn" id="1_0vup5"]
 [ext_resource type="Script" path="res://camera_follow.gd" id="2_3q6rf"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://game_manager.gd" id="12_0y2ry"]
 [ext_resource type="AudioStream" uid="uid://bjibm3nolurbv" path="res://assets/audio/life_is_a_melody.wav" id="12_7aroa"]
 [ext_resource type="PackedScene" uid="uid://dcsvdchr7kyee" path="res://Enemies/Boss.tscn" id="12_7chl5"]
+[ext_resource type="PackedScene" uid="uid://ddn8ua1e8hyqk" path="res://gui/healthbar.tscn" id="12_lwg37"]
 [ext_resource type="PackedScene" uid="uid://8qn3l6vxwqal" path="res://gui/heart_container.tscn" id="12_uqdqp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kashi"]
@@ -2677,10 +2678,10 @@ script = ExtResource("2_3q6rf")
 tilemap = NodePath("../..")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 25.0
-offset_top = 15.0
-offset_right = 85.0
-offset_bottom = 39.0
+offset_left = 132.0
+offset_top = 6.0
+offset_right = 192.0
+offset_bottom = 30.0
 theme_override_fonts/font = ExtResource("11_s8ht1")
 text = "Test"
 
@@ -2689,6 +2690,20 @@ unique_name_in_owner = true
 script = ExtResource("12_0y2ry")
 
 [node name="GUI" type="CanvasLayer" parent="GameManager"]
+
+[node name="Healthbar" parent="GameManager/GUI" instance=ExtResource("12_lwg37")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -119.5
+offset_top = -12.0
+offset_right = 120.5
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 1
 
 [node name="heart_container" parent="GameManager/GUI" instance=ExtResource("12_uqdqp")]
 offset_left = 7.0

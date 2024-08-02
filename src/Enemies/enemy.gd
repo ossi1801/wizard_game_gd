@@ -16,10 +16,11 @@ var current_path: Array[Vector2i]
 #func _ready():pass #default func
 #func _process(delta):pass #default func
 
-
+signal enemy_hp_changed(hp)
 #Todo as signal?
 func damage_enemy_hp(damage:int): 
 	_enemy_hp -= damage;
+	enemy_hp_changed.emit(_enemy_hp)
 	print_debug("ouch damage to enemy"+str(_enemy_hp))
 	if(_enemy_hp<=0):
 		queue_free()

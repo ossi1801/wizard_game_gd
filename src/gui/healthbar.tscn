@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddn8ua1e8hyqk"]
+
+[ext_resource type="Script" path="res://gui/healthbar.gd" id="1_glepw"]
+[ext_resource type="FontFile" uid="uid://c01ly2iyh2l58" path="res://fonts/PixelOperator8.ttf" id="2_x1mtn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d5o0p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wntao"]
+bg_color = Color(0.370691, 0.104975, 0.0693093, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6t4eh"]
+bg_color = Color(0.266575, 0.266575, 0.266575, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.27451)
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1j2eu"]
+bg_color = Color(0.991164, 0.991164, 0.991164, 1)
+
+[node name="Healthbar" type="ProgressBar"]
+z_index = 1
+offset_right = 260.0
+offset_bottom = 2.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_d5o0p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wntao")
+value = 60.0
+show_percentage = false
+script = ExtResource("1_glepw")
+
+[node name="Damagebar" type="ProgressBar" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_6t4eh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1j2eu")
+value = 80.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -105.0
+offset_top = -23.0
+offset_right = 105.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_x1mtn")
+theme_override_font_sizes/font_size = 8
+text = "Boss of the stuff"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
