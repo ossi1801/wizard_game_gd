@@ -2,6 +2,7 @@ class_name Weapon
 extends Area2D
 
 var _weapon_damage: int = 10;
+@export var despawn_on_hit: bool = false;
 #var _weapon_hp: int = 10;
 
 

@@ -14,5 +14,10 @@ func update_gui(text:String):
 #
 #
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	quit_game()
+	pass
+
+func quit_game():
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()

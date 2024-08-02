@@ -1,6 +1,6 @@
 extends Weapon
 
-@export var staff_damage: int =5;
+@export var staff_damage: int =0;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super.set_weapon_damage(staff_damage);

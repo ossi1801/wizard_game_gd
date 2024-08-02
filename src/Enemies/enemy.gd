@@ -5,15 +5,17 @@ extends CharacterBody2D
 
 var _enemy_damage: int = 10;
 var _enemy_hp: int = 10;
-var _enemy_speed: float = 0.5;
-
+var _enemy_speed: float = 100#0.5;
 
 #path finding
 @onready var tilemap:Astar = %TileMap
 var current_path: Array[Vector2i]
 
+
+
 #func _ready():pass #default func
 #func _process(delta):pass #default func
+
 
 #Todo as signal?
 func damage_enemy_hp(damage:int): 
@@ -58,7 +60,8 @@ func update_enemy_pos():
 	if current_path.is_empty():
 		return		
 	var target_position = tilemap.map_to_local(current_path.front())
-	global_position = global_position.move_toward(target_position,_enemy_speed)
+	#global_position = global_position.move_toward(target_position,_enemy_speed)
+	velocity = Vector2(target_position.x - global_position.x, target_position.y - global_position.y).normalized()*_enemy_speed
 	#print_debug(global_position)
 	if global_position == target_position:
 		current_path.pop_front()
@@ -71,7 +74,15 @@ func find_path_to(vector2_pos: Vector2):
 		).slice(1)
 		#print_debug(current_path)
 
-func _unhandled_input(event):
-	if event.is_action_pressed("cursor_click"):
-		find_path_to(get_global_mouse_position())
-	
+
+func _on_hurt_box_area_entered(area:Area2D):
+	if area.get_parent() is Enemy and area.name == "hitBox":
+		return;
+	if area is Weapon: #and area.name == "hitBox":
+		print_debug("Enemy WEAPON HIT"+ area.get_parent().name)
+		var weapon = area as Weapon;
+		damage_enemy_hp(weapon.get_weapon_damage())
+	#else:
+		#print_debug("Enemy got hit by"+ area.get_parent().name)
+		#print_debug("Enemy got hit by"+ area.name)
+	pass # Replace with function body.
