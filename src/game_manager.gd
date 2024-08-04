@@ -1,7 +1,7 @@
 extends Node
 
 @onready var hearts_container = $GUI/heart_container
-
+@onready var boss_health_bar = $GUI/Healthbar
 func update_gui(text:String):
 		for child in hearts_container.get_children():
 			if child is Panel:
@@ -12,8 +12,7 @@ func update_gui(text:String):
 #func _ready():
 #	pass # Replace with function body.
 #
-#
-## Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta):
 	quit_game()
 	pass

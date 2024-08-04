@@ -10,7 +10,7 @@ var _enemy_speed: float = 100#0.5;
 #path finding
 @onready var tilemap:Astar = %TileMap
 var current_path: Array[Vector2i]
-
+#ref to gamemanager
 
 
 #func _ready():pass #default func
